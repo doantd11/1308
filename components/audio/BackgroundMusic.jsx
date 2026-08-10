@@ -2,12 +2,12 @@ import { useEffect, useRef, useState } from 'react';
 import backgroundAudio from '../../audio/Nơi Này Có Anh.mp3';
 
 const musicNotes = [
-  ['♪', '#f87171', '0s'],
-  ['♫', '#facc15', '0.15s'],
-  ['♬', '#4ade80', '0.3s'],
-  ['♪', '#60a5fa', '0.45s'],
-  ['♩', '#c084fc', '0.6s'],
-  ['♫', '#fb923c', '0.75s'],
+  ['♪', '#f87171', '0s', -14],
+  ['♫', '#facc15', '0.15s', 0],
+  ['♬', '#4ade80', '0.3s', 16],
+  ['♪', '#60a5fa', '0.45s', 30],
+  ['♩', '#c084fc', '0.6s', -28],
+  ['♫', '#fb923c', '0.75s', 44],
 ];
 
 export default function BackgroundMusic() {
@@ -61,6 +61,8 @@ export default function BackgroundMusic() {
     return `${minutes}:${seconds}`;
   };
 
+  const progress = duration ? Math.min(100, (currentTime / duration) * 100) : 0;
+
   return (
     <>
       <audio ref={audioRef} loop src={backgroundAudio} />
@@ -81,33 +83,6 @@ export default function BackgroundMusic() {
           zIndex: 3,
         }}
       >
-        {isPlaying && (
-          <div
-            aria-hidden="true"
-            style={{
-              display: 'flex',
-              gap: '18px',
-              left: '50%',
-              position: 'absolute',
-              top: '-28px',
-              transform: 'translateX(-50%)',
-            }}
-          >
-            {musicNotes.map(([note, color, delay]) => (
-              <span
-                key={`${note}-${delay}`}
-                style={{
-                  color,
-                  fontSize: '22px',
-                  animation: `musicNoteJump 900ms ease-in-out ${delay} infinite alternate`,
-                  display: 'inline-block',
-                }}
-              >
-                {note}
-              </span>
-            ))}
-          </div>
-        )}
         <button
           aria-label={isPlaying ? 'Dừng nhạc' : 'Phát nhạc'}
           onClick={toggleMusic}
@@ -126,22 +101,51 @@ export default function BackgroundMusic() {
           {isPlaying ? '❚❚' : '▶'}
         </button>
         <span style={{ fontSize: '12px', minWidth: '34px' }}>{formatTime(currentTime)}</span>
-        <input
-          aria-label="Tiến trình nhạc"
-          max={duration || 0}
-          min="0"
-          onChange={seekMusic}
-          step="0.1"
-          style={{ flex: 1 }}
-          type="range"
-          value={currentTime}
-        />
+        <div style={{ flex: 1, position: 'relative' }}>
+          {isPlaying && (
+            <div
+              aria-hidden="true"
+              style={{
+                left: `${progress}%`,
+                position: 'absolute',
+                top: '-20px',
+                transform: 'translateX(-50%)',
+                whiteSpace: 'nowrap',
+              }}
+            >
+              {musicNotes.map(([note, color, delay, offset]) => (
+                <span
+                  key={`${note}-${delay}`}
+                  style={{
+                    animation: `musicNoteJump 700ms ease-in-out ${delay} infinite alternate`,
+                    color,
+                    display: 'inline-block',
+                    fontSize: '18px',
+                    marginLeft: `${offset}px`,
+                  }}
+                >
+                  {note}
+                </span>
+              ))}
+            </div>
+          )}
+          <input
+            aria-label="Tiến trình nhạc"
+            max={duration || 0}
+            min="0"
+            onChange={seekMusic}
+            step="0.1"
+            style={{ width: '100%' }}
+            type="range"
+            value={currentTime}
+          />
+        </div>
         <span style={{ fontSize: '12px', minWidth: '34px' }}>{formatTime(duration)}</span>
       </div>
       <style>{`
         @keyframes musicNoteJump {
-          from { transform: translateY(4px) rotate(-8deg); }
-          to { transform: translateY(-12px) rotate(8deg); }
+          from { transform: translateY(0) rotate(-8deg); }
+          to { transform: translateY(-5px) rotate(8deg); }
         }
       `}</style>
     </>
