@@ -79,12 +79,6 @@ export default function BackgroundMusic() {
     return () => window.clearInterval(interval);
   }, [isPlaying]);
 
-  const formatTime = (time) => {
-    const minutes = Math.floor(time / 60);
-    const seconds = Math.floor(time % 60).toString().padStart(2, '0');
-    return `${minutes}:${seconds}`;
-  };
-
   const progress = duration ? Math.min(100, (currentTime / duration) * 100) : 0;
   progressRef.current = progress;
 
@@ -98,7 +92,7 @@ export default function BackgroundMusic() {
       <div
         style={{
           alignItems: 'center',
-          background: '#111827',
+          background: '#fefeff',
           borderRadius: '999px',
           bottom: '24px',
           color: '#fff',
@@ -129,16 +123,15 @@ export default function BackgroundMusic() {
         >
           {isPlaying ? '❚❚' : '▶'}
         </button>
-        <span style={{ fontSize: '12px', minWidth: '34px' }}>{formatTime(currentTime)}</span>
         <div style={{ flex: 1, position: 'relative' }}>
           {activeNote && (
             <div
               aria-hidden="true"
               style={{
                 left: `${activeNote.progress}%`,
-                marginLeft: '5px',
+                marginLeft: '20px',
                 position: 'absolute',
-                top: '-20px',
+                top: '-36px',
                 transform: 'translateX(-50%)',
                 whiteSpace: 'nowrap',
               }}
@@ -156,7 +149,7 @@ export default function BackgroundMusic() {
                   animationPlayState: isPlaying ? 'running' : 'paused',
                   color: activeNote.color,
                   display: 'inline-block',
-                  fontSize: '20px',
+                  fontSize: '36px',
                 }}
               >
                 {activeNote.note}
@@ -174,7 +167,6 @@ export default function BackgroundMusic() {
             value={currentTime}
           />
         </div>
-        <span style={{ fontSize: '12px', minWidth: '34px' }}>{formatTime(duration)}</span>
       </div>
       <style>{`
         @keyframes musicNoteRise {
