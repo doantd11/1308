@@ -32,12 +32,18 @@ export default function HomePage() {
   return (
     <>
       <style>{`
+        html, body, #root {
+          height: 100%;
+          margin: 0;
+          overflow: hidden;
+        }
+
         .home-page {
           align-items: center;
           display: flex;
+          height: 100vh;
           justify-content: center;
           position: relative;
-          min-height: 100vh;
           overflow: hidden;
         }
 
