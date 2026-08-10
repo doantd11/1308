@@ -19,7 +19,7 @@ export default function BackgroundTemp({ image }) {
         style={{
           position: 'absolute',
           right: 0,
-          top: 0,
+          top: '-180vh',
           transform: 'scale(10) rotate(45deg)',
           transformOrigin: 'top right',
         }}
