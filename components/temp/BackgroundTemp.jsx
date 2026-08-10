@@ -10,7 +10,7 @@ export default function BackgroundTemp({ image }) {
         position: 'fixed',
         top: 0,
         width: '100vw',
-        zIndex: -1,
+        zIndex: 0,
       }}
     >
       <img
