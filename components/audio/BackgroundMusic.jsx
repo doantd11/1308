@@ -1,6 +1,15 @@
 import { useEffect, useRef, useState } from 'react';
 import backgroundAudio from '../../audio/Nơi Này Có Anh.mp3';
 
+const musicNotes = [
+  ['♪', '#f87171', '0s'],
+  ['♫', '#facc15', '0.15s'],
+  ['♬', '#4ade80', '0.3s'],
+  ['♪', '#60a5fa', '0.45s'],
+  ['♩', '#c084fc', '0.6s'],
+  ['♫', '#fb923c', '0.75s'],
+];
+
 export default function BackgroundMusic() {
   const audioRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -72,6 +81,33 @@ export default function BackgroundMusic() {
           zIndex: 3,
         }}
       >
+        {isPlaying && (
+          <div
+            aria-hidden="true"
+            style={{
+              display: 'flex',
+              gap: '18px',
+              left: '50%',
+              position: 'absolute',
+              top: '-28px',
+              transform: 'translateX(-50%)',
+            }}
+          >
+            {musicNotes.map(([note, color, delay]) => (
+              <span
+                key={`${note}-${delay}`}
+                style={{
+                  color,
+                  fontSize: '22px',
+                  animation: `musicNoteJump 900ms ease-in-out ${delay} infinite alternate`,
+                  display: 'inline-block',
+                }}
+              >
+                {note}
+              </span>
+            ))}
+          </div>
+        )}
         <button
           aria-label={isPlaying ? 'Dừng nhạc' : 'Phát nhạc'}
           onClick={toggleMusic}
@@ -102,6 +138,12 @@ export default function BackgroundMusic() {
         />
         <span style={{ fontSize: '12px', minWidth: '34px' }}>{formatTime(duration)}</span>
       </div>
+      <style>{`
+        @keyframes musicNoteJump {
+          from { transform: translateY(4px) rotate(-8deg); }
+          to { transform: translateY(-12px) rotate(8deg); }
+        }
+      `}</style>
     </>
   );
 }
