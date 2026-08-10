@@ -1,8 +1,12 @@
 import { useState } from 'react';
 import HateBackground from '../components/hate/HateBackground';
+import HatePopup from '../components/hate/HatePopup';
 import LikeBackground from '../components/like/LikeBackground';
+import LikePopup from '../components/like/LikePopup';
 import LoveBackground from '../components/love/LoveBackground';
+import LovePopup from '../components/love/LovePopup';
 import SadBackground from '../components/sad/SadBackground';
+import SadPopup from '../components/sad/SadPopup';
 
 const buttons = [
   ['Like', 'top'],
@@ -12,14 +16,17 @@ const buttons = [
 ];
 
 const backgrounds = [LikeBackground, LoveBackground, HateBackground, SadBackground];
+const popups = [LikePopup, LovePopup, HatePopup, SadPopup];
 const ROTATION_DURATION = 600;
 
 export default function HomePage() {
   const [rotationStep, setRotationStep] = useState(0);
   const [isRotating, setIsRotating] = useState(false);
+  const [popupIndex, setPopupIndex] = useState(null);
   const rotation = -rotationStep * 90;
   const activeIndex = ((rotationStep % buttons.length) + buttons.length) % buttons.length;
   const ActiveBackground = backgrounds[activeIndex];
+  const ActivePopup = popupIndex === null ? null : popups[popupIndex];
 
   const rotate = (step) => {
     if (isRotating) return;
@@ -132,8 +139,13 @@ export default function HomePage() {
           className="button-ring"
           style={{ transform: `translateX(-50%) rotate(${rotation}deg)` }}
         >
-          {buttons.map(([label, position]) => (
-            <button className={`circle-button ${position}`} key={label} type="button">
+          {buttons.map(([label, position], index) => (
+            <button
+              className={`circle-button ${position}`}
+              key={label}
+              onClick={() => setPopupIndex(index)}
+              type="button"
+            >
               {label}
             </button>
           ))}
@@ -158,6 +170,7 @@ export default function HomePage() {
             &gt;
           </button>
         </div>
+        {ActivePopup && <ActivePopup onClose={() => setPopupIndex(null)} />}
       </main>
     </>
   );
