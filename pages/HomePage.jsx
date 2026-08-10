@@ -29,7 +29,7 @@ export default function HomePage() {
           height: 100vh;
           left: 50%;
           position: absolute;
-          transition: transform 300ms ease;
+          transition: transform 600ms ease;
           width: 100vh;
         }
 
