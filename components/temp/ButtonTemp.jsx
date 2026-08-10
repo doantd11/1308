@@ -6,10 +6,12 @@ export default function ButtonTemp({ className, image, label, onClick }) {
       style={{
         alignItems: 'center',
         backgroundColor: '#eab308',
-        border: '2px solid #facc15',
+        border: '4px solid #facc15',
         color: '#fff',
         display: 'flex',
+        fontSize: '32px',
         justifyContent: 'center',
+        padding: '24px 40px',
         position: 'relative',
       }}
       type="button"
@@ -18,13 +20,13 @@ export default function ButtonTemp({ className, image, label, onClick }) {
         alt=""
         src={image}
         style={{
-          height: '28px',
+          height: '56px',
           objectFit: 'contain',
           position: 'absolute',
           right: '-5px',
-          top: '-5px',
+          top: '-8px',
           transform: 'rotate(15deg)',
-          width: '28px',
+          width: '56px',
         }}
       />
       {label}
