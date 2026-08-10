@@ -14,9 +14,9 @@ const getRandomStyles = () => {
 
     return {
       left: `${((column + 0.5) / GRID_SIZE) * 100}%`,
-      opacity: Math.random() * 0.5,
+      opacity: 0.8 + Math.random() * 0.2,
       top: `${((row + 0.5) / GRID_SIZE) * 100}%`,
-      transform: `translate(-50%, -50%) scale(${0.1 + Math.random() * 0.9})`,
+      transform: `translate(-50%, -50%) scale(${0.5 + Math.random() * 0.3})`,
     };
   });
 };
