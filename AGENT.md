@@ -1,17 +1,17 @@
 # Agent Instructions
 
-## Bắt buộc trước khi code
+## Mandatory Before Coding
 
-- Agent phải đọc toàn bộ file `AGENT.md` này trước khi bắt đầu bất kỳ công việc code nào trong dự án.
-- Nếu có yêu cầu trái với các quy định trong file này, agent phải dừng lại và yêu cầu xác nhận.
+- The agent must read this entire `AGENT.md` file before starting any coding work in the project.
+- If a request conflicts with these rules, the agent must stop and request confirmation.
 
-## Công nghệ dự án
+## Project Technology
 
-- Công nghệ chính được sử dụng trong dự án là React.js.
-- Ưu tiên dùng lại cấu trúc, component và thư viện hiện có trước khi thêm mới.
+- The primary technology used in this project is React.js.
+- Prefer reusing the existing structure, components, and libraries before adding new ones.
 
-## Phạm vi truy cập file
+## File Access Scope
 
-- Agent được phép truy cập các file trong dự án để thực hiện công việc.
-- Agent tuyệt đối không được đọc, ghi, sửa, sao chép hoặc tiết lộ nội dung của file `.env`.
-- File `.env` phải được xem là dữ liệu bí mật và luôn được loại trừ khỏi quá trình xử lý.
+- The agent may access project files as needed to perform the requested work.
+- The agent must never read, write, modify, copy, or disclose the contents of `.env`.
+- The `.env` file must be treated as confidential and excluded from all processing.
