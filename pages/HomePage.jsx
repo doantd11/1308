@@ -1,4 +1,8 @@
 import { useState } from 'react';
+import HateBackground from '../components/hate/HateBackground';
+import LikeBackground from '../components/like/LikeBackground';
+import LoveBackground from '../components/love/LoveBackground';
+import SadBackground from '../components/sad/SadBackground';
 
 const buttons = [
   ['Like', 'top'],
@@ -7,8 +11,12 @@ const buttons = [
   ['Sad', 'left'],
 ];
 
+const backgrounds = [LikeBackground, LoveBackground, HateBackground, SadBackground];
+
 export default function HomePage() {
-  const [rotation, setRotation] = useState(0);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const rotation = -activeIndex * 90;
+  const ActiveBackground = backgrounds[activeIndex];
 
   return (
     <>
@@ -97,6 +105,7 @@ export default function HomePage() {
         }
       `}</style>
       <main className="home-page">
+        <ActiveBackground />
         <div
           className="button-ring"
           style={{ transform: `translateX(-50%) rotate(${rotation}deg)` }}
@@ -111,7 +120,9 @@ export default function HomePage() {
           <button
             aria-label="Select left button"
             className="rotation-control"
-            onClick={() => setRotation((current) => current + 90)}
+            onClick={() =>
+              setActiveIndex((current) => (current - 1 + buttons.length) % buttons.length)
+            }
             type="button"
           >
             &lt;
@@ -119,7 +130,7 @@ export default function HomePage() {
           <button
             aria-label="Select right button"
             className="rotation-control"
-            onClick={() => setRotation((current) => current - 90)}
+            onClick={() => setActiveIndex((current) => (current + 1) % buttons.length)}
             type="button"
           >
             &gt;
