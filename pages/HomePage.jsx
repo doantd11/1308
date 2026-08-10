@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import BackgroundMusic from '../components/audio/BackgroundMusic';
 import HateBackground from '../components/hate/HateBackground';
 import HateButton from '../components/hate/HateButton';
 import HatePopup from '../components/hate/HatePopup';
@@ -142,6 +143,7 @@ export default function HomePage() {
       `}</style>
       <main className="home-page">
         <ActiveBackground key={rotationStep} direction={flipDirection} />
+        <BackgroundMusic />
         <div
           className="button-ring"
           style={{ transform: `translateX(-50%) rotate(${rotation}deg)` }}
