@@ -12,7 +12,6 @@ export default function ButtonTemp({ className, image, label, onClick }) {
         fontSize: '32px',
         justifyContent: 'center',
         padding: '24px 40px',
-        position: 'relative',
       }}
       type="button"
     >
