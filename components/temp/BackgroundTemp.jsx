@@ -1,6 +1,8 @@
+import { Fragment } from 'react';
+
 const instances = [
-  { id: 1, x: 1, y: 1, size: 300, rotate: -15, opacity: 1 },
-  { id: 2, x: 18, y: 55, size: 72, rotate: 10, opacity: 0.9 },
+  { id: 1, x: 1, y: 1, size: 300, rotate: 20, opacity: 1 },
+  { id: 2, x: 50, y: 55, size: 72, rotate: 10, opacity: 0.9 },
   { id: 3, x: 30, y: 20, size: 148, rotate: -5, opacity: 1 },
   { id: 4, x: 55, y: 5, size: 100, rotate: 8, opacity: 1 },
   { id: 5, x: 72, y: 0, size: 60, rotate: -20, opacity: 0.7 },
@@ -33,22 +35,40 @@ export default function BackgroundTemp({ image }) {
       }}
     >
       {instances.map((instance) => (
-        <img
-          alt=""
-          key={instance.id}
-          src={image}
-          style={{
-            height: `${instance.size}px`,
-            left: `${instance.x}%`,
-            objectFit: 'contain',
-            opacity: instance.opacity,
-            position: 'absolute',
-            top: `${instance.y}%`,
-            transform: `rotate(${instance.rotate}deg)`,
-            userSelect: 'none',
-            width: `${instance.size}px`,
-          }}
-        />
+        <Fragment key={instance.id}>
+          <img
+            alt=""
+            src={image}
+            style={{
+              height: `${instance.size}px`,
+              left: `${instance.x}%`,
+              objectFit: 'contain',
+              opacity: instance.opacity,
+              position: 'absolute',
+              top: `${instance.y}%`,
+              transform: `rotate(${instance.rotate}deg)`,
+              userSelect: 'none',
+              width: `${instance.size}px`,
+            }}
+          />
+          <span
+            style={{
+              backgroundColor: '#111827',
+              borderRadius: '4px',
+              color: '#fff',
+              fontSize: '12px',
+              fontWeight: 700,
+              left: `calc(${instance.x}% + ${instance.size}px + 6px)`,
+              padding: '2px 5px',
+              position: 'absolute',
+              top: `calc(${instance.y}% + ${instance.size / 2}px)`,
+              transform: 'translateY(-50%)',
+              whiteSpace: 'nowrap',
+            }}
+          >
+            ID: {instance.id}
+          </span>
+        </Fragment>
       ))}
     </div>
   );
