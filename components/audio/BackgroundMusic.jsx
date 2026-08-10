@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-
-const AUDIO_SRC = '/1308/audio/background.mp3';
+import backgroundAudio from '../../audio/Nơi Này Có Anh.mp3';
 
 export default function BackgroundMusic() {
   const audioRef = useRef(null);
@@ -27,7 +26,7 @@ export default function BackgroundMusic() {
 
   return (
     <>
-      <audio ref={audioRef} loop src={AUDIO_SRC} />
+      <audio ref={audioRef} loop src={backgroundAudio} />
       <button
         aria-label={isPlaying ? 'Tắt nhạc nền' : 'Bật nhạc nền'}
         onClick={toggleMusic}
