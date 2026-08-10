@@ -1,11 +1,15 @@
 import { useState } from 'react';
 import HateBackground from '../components/hate/HateBackground';
+import HateButton from '../components/hate/HateButton';
 import HatePopup from '../components/hate/HatePopup';
 import LikeBackground from '../components/like/LikeBackground';
+import LikeButton from '../components/like/LikeButton';
 import LikePopup from '../components/like/LikePopup';
 import LoveBackground from '../components/love/LoveBackground';
+import LoveButton from '../components/love/LoveButton';
 import LovePopup from '../components/love/LovePopup';
 import SadBackground from '../components/sad/SadBackground';
+import SadButton from '../components/sad/SadButton';
 import SadPopup from '../components/sad/SadPopup';
 
 const buttons = [
@@ -16,6 +20,7 @@ const buttons = [
 ];
 
 const backgrounds = [LikeBackground, LoveBackground, HateBackground, SadBackground];
+const buttonComponents = [LikeButton, LoveButton, HateButton, SadButton];
 const popups = [LikePopup, LovePopup, HatePopup, SadPopup];
 const ROTATION_DURATION = 600;
 
@@ -139,16 +144,17 @@ export default function HomePage() {
           className="button-ring"
           style={{ transform: `translateX(-50%) rotate(${rotation}deg)` }}
         >
-          {buttons.map(([label, position], index) => (
-            <button
-              className={`circle-button ${position}`}
-              key={label}
-              onClick={() => setPopupIndex(index)}
-              type="button"
-            >
-              {label}
-            </button>
-          ))}
+          {buttons.map(([, position], index) => {
+            const Button = buttonComponents[index];
+
+            return (
+              <Button
+                className={`circle-button ${position}`}
+                key={position}
+                onClick={() => setPopupIndex(index)}
+              />
+            );
+          })}
         </div>
         <div className="rotation-controls">
           <button
