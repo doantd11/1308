@@ -16,7 +16,7 @@ const instances = [
   { id: 13, x: 70, y: 60, size: 75, rotate: -22, opacity: 0.7 },
 ];
 
-export default function BackgroundTemp({ image }) {
+export default function BackgroundTemp({ direction = 1, image }) {
   return (
     <div
       aria-hidden="true"
@@ -27,6 +27,7 @@ export default function BackgroundTemp({ image }) {
         pointerEvents: 'none',
         position: 'relative',
         width: '100%',
+        animation: `${direction > 0 ? 'pageFlipNext' : 'pageFlipPrevious'} 600ms ease both`,
       }}
     >
       {instances.map((instance) => (
@@ -65,6 +66,31 @@ export default function BackgroundTemp({ image }) {
           </span>
         </Fragment>
       ))}
+      <style>{`
+        @keyframes pageFlipNext {
+          from {
+            opacity: 0.35;
+            transform: perspective(1200px) rotateY(90deg);
+            transform-origin: right center;
+          }
+          to {
+            opacity: 1;
+            transform: perspective(1200px) rotateY(0);
+          }
+        }
+
+        @keyframes pageFlipPrevious {
+          from {
+            opacity: 0.35;
+            transform: perspective(1200px) rotateY(-90deg);
+            transform-origin: left center;
+          }
+          to {
+            opacity: 1;
+            transform: perspective(1200px) rotateY(0);
+          }
+        }
+      `}</style>
     </div>
   );
 }

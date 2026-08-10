@@ -28,6 +28,7 @@ export default function HomePage() {
   const [rotationStep, setRotationStep] = useState(0);
   const [isRotating, setIsRotating] = useState(false);
   const [popupIndex, setPopupIndex] = useState(null);
+  const [flipDirection, setFlipDirection] = useState(1);
   const rotation = -rotationStep * 90;
   const activeIndex = ((rotationStep % buttons.length) + buttons.length) % buttons.length;
   const ActiveBackground = backgrounds[activeIndex];
@@ -36,6 +37,7 @@ export default function HomePage() {
   const rotate = (step) => {
     if (isRotating) return;
 
+    setFlipDirection(step);
     setRotationStep((current) => current + step);
     setIsRotating(true);
     window.setTimeout(() => setIsRotating(false), ROTATION_DURATION);
@@ -139,7 +141,7 @@ export default function HomePage() {
         }
       `}</style>
       <main className="home-page">
-        <ActiveBackground />
+        <ActiveBackground key={rotationStep} direction={flipDirection} />
         <div
           className="button-ring"
           style={{ transform: `translateX(-50%) rotate(${rotation}deg)` }}
