@@ -136,6 +136,7 @@ export default function BackgroundMusic() {
               aria-hidden="true"
               style={{
                 left: `${activeNote.progress}%`,
+                marginLeft: '5px',
                 position: 'absolute',
                 top: '-20px',
                 transform: 'translateX(-50%)',
