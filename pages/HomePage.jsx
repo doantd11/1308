@@ -10,20 +10,19 @@ export default function HomePage() {
     <>
       <style>{`
         .home-page {
+          align-items: center;
+          display: flex;
+          justify-content: center;
           min-height: 100vh;
           overflow: hidden;
-          position: relative;
         }
 
         .button-ring {
           border: 2px solid #2563eb;
           border-radius: 50%;
-          bottom: -140px;
-          height: 280px;
-          left: 50%;
+          height: 360px;
           position: absolute;
-          transform: translateX(-50%);
-          width: 280px;
+          width: 360px;
         }
 
         .circle-button {
