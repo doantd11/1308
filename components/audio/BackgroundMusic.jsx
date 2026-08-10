@@ -2,12 +2,12 @@ import { useEffect, useRef, useState } from 'react';
 import backgroundAudio from '../../audio/Nơi Này Có Anh.mp3';
 
 const musicNotes = [
-  ['♪', '#f87171', '0s', -14],
-  ['♫', '#facc15', '0.15s', 0],
-  ['♬', '#4ade80', '0.3s', 16],
-  ['♪', '#60a5fa', '0.45s', 30],
-  ['♩', '#c084fc', '0.6s', -28],
-  ['♫', '#fb923c', '0.75s', 44],
+  ['♪', '#f87171'],
+  ['♫', '#facc15'],
+  ['♬', '#4ade80'],
+  ['♪', '#60a5fa'],
+  ['♩', '#c084fc'],
+  ['♫', '#fb923c'],
 ];
 
 export default function BackgroundMusic() {
@@ -15,6 +15,10 @@ export default function BackgroundMusic() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
+  const [activeNote, setActiveNote] = useState(null);
+  const activeNoteRef = useRef(null);
+  const noteIdRef = useRef(0);
+  const progressRef = useRef(0);
 
   useEffect(() => {
     const audio = audioRef.current;
@@ -55,6 +59,26 @@ export default function BackgroundMusic() {
     if (audioRef.current) audioRef.current.currentTime = time;
   };
 
+  const spawnNote = () => {
+    const [note, color] = musicNotes[Math.floor(Math.random() * musicNotes.length)];
+    const nextNote = {
+      color,
+      id: noteIdRef.current++,
+      note,
+      progress: progressRef.current,
+    };
+    activeNoteRef.current = nextNote;
+    setActiveNote(nextNote);
+  };
+
+  useEffect(() => {
+    if (!isPlaying) return undefined;
+
+    if (!activeNoteRef.current) spawnNote();
+    const interval = window.setInterval(spawnNote, 900);
+    return () => window.clearInterval(interval);
+  }, [isPlaying]);
+
   const formatTime = (time) => {
     const minutes = Math.floor(time / 60);
     const seconds = Math.floor(time % 60).toString().padStart(2, '0');
@@ -62,10 +86,15 @@ export default function BackgroundMusic() {
   };
 
   const progress = duration ? Math.min(100, (currentTime / duration) * 100) : 0;
+  progressRef.current = progress;
 
   return (
     <>
-      <audio ref={audioRef} loop src={backgroundAudio} />
+      <audio
+        ref={audioRef}
+        onEnded={() => setIsPlaying(false)}
+        src={backgroundAudio}
+      />
       <div
         style={{
           alignItems: 'center',
@@ -102,31 +131,35 @@ export default function BackgroundMusic() {
         </button>
         <span style={{ fontSize: '12px', minWidth: '34px' }}>{formatTime(currentTime)}</span>
         <div style={{ flex: 1, position: 'relative' }}>
-          {isPlaying && (
+          {activeNote && (
             <div
               aria-hidden="true"
               style={{
-                left: `${progress}%`,
+                left: `${activeNote.progress}%`,
                 position: 'absolute',
                 top: '-20px',
                 transform: 'translateX(-50%)',
                 whiteSpace: 'nowrap',
               }}
             >
-              {musicNotes.map(([note, color, delay, offset]) => (
-                <span
-                  key={`${note}-${delay}`}
-                  style={{
-                    animation: `musicNoteJump 700ms ease-in-out ${delay} infinite alternate`,
-                    color,
-                    display: 'inline-block',
-                    fontSize: '18px',
-                    marginLeft: `${offset}px`,
-                  }}
-                >
-                  {note}
-                </span>
-              ))}
+              <span
+                key={activeNote.id}
+                onAnimationEnd={() => {
+                  if (activeNoteRef.current?.id === activeNote.id) {
+                    activeNoteRef.current = null;
+                    setActiveNote(null);
+                  }
+                }}
+                style={{
+                  animation: 'musicNoteRise 700ms ease-out forwards',
+                  animationPlayState: isPlaying ? 'running' : 'paused',
+                  color: activeNote.color,
+                  display: 'inline-block',
+                  fontSize: '20px',
+                }}
+              >
+                {activeNote.note}
+              </span>
             </div>
           )}
           <input
@@ -143,9 +176,9 @@ export default function BackgroundMusic() {
         <span style={{ fontSize: '12px', minWidth: '34px' }}>{formatTime(duration)}</span>
       </div>
       <style>{`
-        @keyframes musicNoteJump {
-          from { transform: translateY(0) rotate(-8deg); }
-          to { transform: translateY(-5px) rotate(8deg); }
+        @keyframes musicNoteRise {
+          from { opacity: 1; transform: translateY(0) rotate(-8deg); }
+          to { opacity: 0; transform: translateY(-5px) rotate(8deg); }
         }
       `}</style>
     </>
