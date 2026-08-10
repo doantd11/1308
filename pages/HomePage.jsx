@@ -72,7 +72,7 @@ export default function HomePage() {
         }
 
         .rotation-controls {
-          bottom: 24px;
+          bottom: 25vh;
           display: flex;
           gap: 12px;
           left: 50%;
@@ -109,20 +109,20 @@ export default function HomePage() {
         </div>
         <div className="rotation-controls">
           <button
-            aria-label="Rotate left"
-            className="rotation-control"
-            onClick={() => setRotation((current) => current - 90)}
-            type="button"
-          >
-            ←
-          </button>
-          <button
-            aria-label="Rotate right"
+            aria-label="Select left button"
             className="rotation-control"
             onClick={() => setRotation((current) => current + 90)}
             type="button"
           >
-            →
+            &lt;
+          </button>
+          <button
+            aria-label="Select right button"
+            className="rotation-control"
+            onClick={() => setRotation((current) => current - 90)}
+            type="button"
+          >
+            &gt;
           </button>
         </div>
       </main>
