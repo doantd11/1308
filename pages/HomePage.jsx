@@ -12,12 +12,22 @@ const buttons = [
 ];
 
 const backgrounds = [LikeBackground, LoveBackground, HateBackground, SadBackground];
+const ROTATION_DURATION = 600;
 
 export default function HomePage() {
   const [rotationStep, setRotationStep] = useState(0);
+  const [isRotating, setIsRotating] = useState(false);
   const rotation = -rotationStep * 90;
   const activeIndex = ((rotationStep % buttons.length) + buttons.length) % buttons.length;
   const ActiveBackground = backgrounds[activeIndex];
+
+  const rotate = (step) => {
+    if (isRotating) return;
+
+    setRotationStep((current) => current + step);
+    setIsRotating(true);
+    window.setTimeout(() => setIsRotating(false), ROTATION_DURATION);
+  };
 
   return (
     <>
@@ -104,6 +114,11 @@ export default function HomePage() {
         .rotation-control:hover {
           background: #374151;
         }
+
+        .rotation-control:disabled {
+          cursor: wait;
+          opacity: 0.5;
+        }
       `}</style>
       <main className="home-page">
         <ActiveBackground />
@@ -121,7 +136,8 @@ export default function HomePage() {
           <button
             aria-label="Select left button"
             className="rotation-control"
-            onClick={() => setRotationStep((current) => current - 1)}
+            disabled={isRotating}
+            onClick={() => rotate(-1)}
             type="button"
           >
             &lt;
@@ -129,7 +145,8 @@ export default function HomePage() {
           <button
             aria-label="Select right button"
             className="rotation-control"
-            onClick={() => setRotationStep((current) => current + 1)}
+            disabled={isRotating}
+            onClick={() => rotate(1)}
             type="button"
           >
             &gt;
