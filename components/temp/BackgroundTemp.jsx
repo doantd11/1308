@@ -7,7 +7,7 @@ const getRandomStyle = () => ({
   transform: `translate(-50%, -50%) scale(${0.1 + Math.random() * 0.9})`,
 });
 
-export default function BackgroundTemp() {
+export default function BackgroundTemp({ image }) {
   const [imageStyle] = useState(getRandomStyle);
 
   return (
@@ -26,7 +26,7 @@ export default function BackgroundTemp() {
     >
       <img
         alt=""
-        src="./images/sticker/Love.png"
+        src={image}
         style={{
           position: 'absolute',
           ...imageStyle,
