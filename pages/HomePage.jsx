@@ -13,6 +13,7 @@ export default function HomePage() {
           align-items: center;
           display: flex;
           justify-content: center;
+          position: relative;
           min-height: 100vh;
           overflow: hidden;
         }
@@ -20,9 +21,12 @@ export default function HomePage() {
         .button-ring {
           border: 2px solid #2563eb;
           border-radius: 50%;
-          height: 360px;
+          bottom: -50vh;
+          height: 100vh;
+          left: 50%;
           position: absolute;
-          width: 360px;
+          transform: translateX(-50%);
+          width: 100vh;
         }
 
         .circle-button {
