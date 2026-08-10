@@ -14,8 +14,9 @@ const buttons = [
 const backgrounds = [LikeBackground, LoveBackground, HateBackground, SadBackground];
 
 export default function HomePage() {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const rotation = -activeIndex * 90;
+  const [rotationStep, setRotationStep] = useState(0);
+  const rotation = -rotationStep * 90;
+  const activeIndex = ((rotationStep % buttons.length) + buttons.length) % buttons.length;
   const ActiveBackground = backgrounds[activeIndex];
 
   return (
@@ -120,9 +121,7 @@ export default function HomePage() {
           <button
             aria-label="Select left button"
             className="rotation-control"
-            onClick={() =>
-              setActiveIndex((current) => (current - 1 + buttons.length) % buttons.length)
-            }
+            onClick={() => setRotationStep((current) => current - 1)}
             type="button"
           >
             &lt;
@@ -130,7 +129,7 @@ export default function HomePage() {
           <button
             aria-label="Select right button"
             className="rotation-control"
-            onClick={() => setActiveIndex((current) => (current + 1) % buttons.length)}
+            onClick={() => setRotationStep((current) => current + 1)}
             type="button"
           >
             &gt;
