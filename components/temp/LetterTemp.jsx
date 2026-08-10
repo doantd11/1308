@@ -61,18 +61,18 @@ export default function LetterTemp({ image, onClose }) {
         .letter-sticker {
           align-items: center;
           display: flex;
-          height: 50px;
+          height: 80px;
           justify-content: center;
           left: 50px;
           position: absolute;
           top: 50px;
-          width: 50px;
+          width: 80px;
         }
 
         .letter-sticker img {
-          height: 50px;
+          height: 100px;
           object-fit: contain;
-          width: 50px;
+          width: 100px;
         }
 
         .letter-lines {
