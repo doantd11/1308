@@ -9,8 +9,8 @@ export default function ButtonTemp({ className, image, label, onClick }) {
         border: '2px solid #facc15',
         color: '#fff',
         display: 'flex',
-        gap: '8px',
         justifyContent: 'center',
+        position: 'relative',
       }}
       type="button"
     >
@@ -20,6 +20,9 @@ export default function ButtonTemp({ className, image, label, onClick }) {
         style={{
           height: '28px',
           objectFit: 'contain',
+          position: 'absolute',
+          right: '-5px',
+          top: '-5px',
           transform: 'rotate(15deg)',
           width: '28px',
         }}
