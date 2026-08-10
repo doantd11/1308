@@ -41,17 +41,35 @@ export default function HomePage() {
           cursor: pointer;
           padding: 12px 20px;
           position: absolute;
-          transform: translate(-50%, -50%);
         }
 
         .circle-button:hover {
           background: #1d4ed8;
         }
 
-        .top { left: 50%; top: 0; }
-        .right { left: 100%; top: 50%; }
-        .bottom { left: 50%; top: 100%; }
-        .left { left: 0; top: 50%; }
+        .top {
+          left: 50%;
+          top: 0;
+          transform: translate(-50%, -50%) rotate(0deg);
+        }
+
+        .right {
+          left: 100%;
+          top: 50%;
+          transform: translate(-50%, -50%) rotate(90deg);
+        }
+
+        .bottom {
+          left: 50%;
+          top: 100%;
+          transform: translate(-50%, -50%) rotate(180deg);
+        }
+
+        .left {
+          left: 0;
+          top: 50%;
+          transform: translate(-50%, -50%) rotate(-90deg);
+        }
 
         .rotation-controls {
           bottom: 24px;
