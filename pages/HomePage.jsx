@@ -10,23 +10,30 @@ import LovePopup from '../components/love/LovePopup';
 import SadButton from '../components/sad/SadButton';
 import SadPopup from '../components/sad/SadPopup';
 
-const buttonComponents = [LikeButton, LoveButton, HateButton, SadButton];
-const popups = [LikePopup, LovePopup, HatePopup, SadPopup];
-const buttonLabels = ['Like', 'Love', 'Hate', 'Sad'];
-const PAGE_COUNT = buttonComponents.length;
+const buttons = [
+  { Button: LikeButton, Popup: LikePopup, label: 'Like' },
+  { Button: LoveButton, Popup: LovePopup, label: 'Love' },
+  { Button: HateButton, Popup: HatePopup, label: 'Hate' },
+  { Button: SadButton, Popup: SadPopup, label: 'Sad' },
+];
+const PAGE_COUNT = buttons.length;
+const pageArrows = [
+  { label: 'Trang sau', step: 1, symbol: '>' },
+  { label: 'Trang trước', step: -1, symbol: '<' },
+];
 
 export default function HomePage() {
   const [popupIndex, setPopupIndex] = useState(null);
-  const [pageIndex, setPageIndex] = useState(0);
+  const [currentButtonIndex, setCurrentButtonIndex] = useState(0);
   const [pageStack, setPageStack] = useState([{ index: 0, key: 0 }]);
   const [pageDirection, setPageDirection] = useState(1);
   const ActiveBackground = LikeBackground;
-  const ActivePopup = popupIndex === null ? null : popups[popupIndex];
+  const ActivePopup = popupIndex === null ? null : buttons[popupIndex].Popup;
 
   const changePage = (step) => {
-    const nextIndex = (pageIndex + step + PAGE_COUNT) % PAGE_COUNT;
+    const nextIndex = (currentButtonIndex + step + PAGE_COUNT) % PAGE_COUNT;
     setPageDirection(step);
-    setPageIndex(nextIndex);
+    setCurrentButtonIndex(nextIndex);
     setPageStack((current) => [...current, { index: nextIndex, key: Date.now() }]);
   };
 
@@ -142,13 +149,15 @@ export default function HomePage() {
 
             return (
               <div className={`button-page ${pageClass}`} key={page.key}>
-                {buttonComponents.map((Button, offset) => {
+                {buttons.map((_, offset) => {
                   const buttonIndex = (page.index + offset) % PAGE_COUNT;
+                  const button = buttons[buttonIndex];
+                  const Button = button.Button;
 
                   return (
                     <Button
                       className="circle-button"
-                      key={buttonLabels[buttonIndex]}
+                      key={button.label}
                       onClick={() => setPopupIndex(buttonIndex)}
                       showContent={offset === 0}
                       style={{
@@ -164,12 +173,16 @@ export default function HomePage() {
           })}
         </div>
         <div className="page-controls">
-          <button aria-label="Trang trước" onClick={() => changePage(-1)} type="button">
-            &lt;
-          </button>
-          <button aria-label="Trang sau" onClick={() => changePage(1)} type="button">
-            &gt;
-          </button>
+          {pageArrows.map((arrow) => (
+            <button
+              aria-label={arrow.label}
+              key={arrow.label}
+              onClick={() => changePage(arrow.step)}
+              type="button"
+            >
+              {arrow.symbol}
+            </button>
+          ))}
         </div>
         {ActivePopup && <ActivePopup onClose={() => setPopupIndex(null)} />}
       </main>
