@@ -67,7 +67,7 @@ export default function HomePage() {
           border-radius: 50%;
           bottom: -50vh;
           height: 100vh;
-          left: 50%;
+          left: 100%;
           position: absolute;
           transition: transform 600ms ease-out;
           width: 100vh;
