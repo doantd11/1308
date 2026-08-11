@@ -1,9 +1,9 @@
+import ConfettiCannon from './ConfettiCannon';
 import birthdayBanner from '../../images/sticker/hb.png';
 
 export default function BackgroundTemp() {
   return (
     <div
-      aria-hidden="true"
       style={{
         backgroundColor: '#fff',
         inset: 0,
@@ -25,7 +25,9 @@ export default function BackgroundTemp() {
           transform: 'translateX(-50%)',
           width: '740px',
         }}
-      />
+        />
+      <ConfettiCannon side="left" />
+      <ConfettiCannon side="right" />
     </div>
   );
 }
