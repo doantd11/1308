@@ -13,7 +13,6 @@ import SadPopup from '../components/sad/SadPopup';
 const buttonComponents = [LikeButton, LoveButton, HateButton, SadButton];
 const popups = [LikePopup, LovePopup, HatePopup, SadPopup];
 const buttonLabels = ['Like', 'Love', 'Hate', 'Sad'];
-const BUTTON_ANGLES = [-45, -25, -5, 15];
 const PAGE_COUNT = buttonComponents.length;
 
 export default function HomePage() {
@@ -50,18 +49,20 @@ export default function HomePage() {
         }
 
         .button-ring {
-          border: 2px solid #2563eb;
-          border-radius: 50%;
-          bottom: -65vh;
-          height: 130vh;
-          left: calc(100% - 20px);
-          position: absolute;
-          transition: transform 600ms ease-out;
-          width: 130vh;
+          bottom: 12vh;
+          height: 104px;
+          left: 50%;
+          position: fixed;
+          transform: translateX(-50%);
+          width: min(900px, calc(100vw - 48px));
+          z-index: 2;
         }
 
         .button-page {
+          align-items: center;
+          display: flex;
           inset: 0;
+          justify-content: center;
           pointer-events: none;
           position: absolute;
         }
@@ -101,9 +102,7 @@ export default function HomePage() {
           border-radius: 999px;
           color: white;
           cursor: pointer;
-          padding: 12px 20px;
-          position: absolute;
-          transform: translate(-50%, -50%) rotate(var(--angle)) translateY(-65vh) rotate(calc(var(--angle) * -1));
+          position: relative;
           transition: opacity 200ms ease;
         }
 
@@ -154,8 +153,9 @@ export default function HomePage() {
                       key={buttonLabels[buttonIndex]}
                       onClick={() => setPopupIndex(buttonIndex)}
                       style={{
-                        '--angle': `${BUTTON_ANGLES[offset]}deg`,
+                        marginLeft: offset === 0 ? 0 : '-110px',
                         opacity: offset === 0 ? 1 : 0.35,
+                        zIndex: PAGE_COUNT - offset,
                       }}
                     />
                   );
