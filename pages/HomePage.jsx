@@ -26,7 +26,7 @@ export default function HomePage() {
           flex-direction: column;
           gap: 16px;
           position: absolute;
-          right: 100px;
+          right: 136px;
           z-index: 1;
         }
       `}</style>
