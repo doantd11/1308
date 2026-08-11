@@ -53,7 +53,7 @@ export default function ConfettiCannon({ side }) {
         pointerEvents: 'auto',
         position: 'absolute',
         right: side === 'right' ? 'max(24px, 12vw)' : 'auto',
-        transform: 'scale(4)',
+        transform: 'scale(2)',
         transformOrigin: 'bottom center',
         width: '72px',
         zIndex: 1,
