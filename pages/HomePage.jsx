@@ -1,15 +1,12 @@
 import { useState } from 'react';
 import BackgroundMusic from '../components/audio/BackgroundMusic';
-import HateBackground from '../components/hate/HateBackground';
 import HateButton from '../components/hate/HateButton';
 import HatePopup from '../components/hate/HatePopup';
 import LikeBackground from '../components/like/LikeBackground';
 import LikeButton from '../components/like/LikeButton';
 import LikePopup from '../components/like/LikePopup';
-import LoveBackground from '../components/love/LoveBackground';
 import LoveButton from '../components/love/LoveButton';
 import LovePopup from '../components/love/LovePopup';
-import SadBackground from '../components/sad/SadBackground';
 import SadButton from '../components/sad/SadButton';
 import SadPopup from '../components/sad/SadPopup';
 
@@ -20,29 +17,13 @@ const buttons = [
   ['Sad', 'left'],
 ];
 
-const backgrounds = [LikeBackground, LoveBackground, HateBackground, SadBackground];
 const buttonComponents = [LikeButton, LoveButton, HateButton, SadButton];
 const popups = [LikePopup, LovePopup, HatePopup, SadPopup];
-const ROTATION_DURATION = 600;
 
 export default function HomePage() {
-  const [rotationStep, setRotationStep] = useState(0);
-  const [isRotating, setIsRotating] = useState(false);
   const [popupIndex, setPopupIndex] = useState(null);
-  const [flipDirection, setFlipDirection] = useState(1);
-  const rotation = -rotationStep * 90;
-  const activeIndex = ((rotationStep % buttons.length) + buttons.length) % buttons.length;
-  const ActiveBackground = backgrounds[activeIndex];
+  const ActiveBackground = LikeBackground;
   const ActivePopup = popupIndex === null ? null : popups[popupIndex];
-
-  const rotate = (step) => {
-    if (isRotating) return;
-
-    setFlipDirection(step);
-    setRotationStep((current) => current + step);
-    setIsRotating(true);
-    window.setTimeout(() => setIsRotating(false), ROTATION_DURATION);
-  };
 
   return (
     <>
@@ -111,42 +92,13 @@ export default function HomePage() {
           transform: translate(-50%, -50%) rotate(-90deg);
         }
 
-        .rotation-controls {
-          bottom: 25vh;
-          display: flex;
-          gap: 12px;
-          left: 50%;
-          position: fixed;
-          transform: translateX(-50%);
-          z-index: 2;
-        }
-
-        .rotation-control {
-          background: #111827;
-          border: 0;
-          border-radius: 999px;
-          color: white;
-          cursor: pointer;
-          font-size: 24px;
-          height: 48px;
-          width: 48px;
-        }
-
-        .rotation-control:hover {
-          background: #374151;
-        }
-
-        .rotation-control:disabled {
-          cursor: wait;
-          opacity: 0.5;
-        }
       `}</style>
       <main className="home-page">
-        <ActiveBackground key={rotationStep} direction={flipDirection} />
+        <ActiveBackground />
         <BackgroundMusic />
         <div
           className="button-ring"
-          style={{ transform: `translateX(-50%) rotate(${rotation}deg)` }}
+          style={{ transform: 'translateX(-50%)' }}
         >
           {buttons.map(([, position], index) => {
             const Button = buttonComponents[index];
@@ -159,26 +111,6 @@ export default function HomePage() {
               />
             );
           })}
-        </div>
-        <div className="rotation-controls">
-          <button
-            aria-label="Select left button"
-            className="rotation-control"
-            disabled={isRotating}
-            onClick={() => rotate(-1)}
-            type="button"
-          >
-            &lt;
-          </button>
-          <button
-            aria-label="Select right button"
-            className="rotation-control"
-            disabled={isRotating}
-            onClick={() => rotate(1)}
-            type="button"
-          >
-            &gt;
-          </button>
         </div>
         {ActivePopup && <ActivePopup onClose={() => setPopupIndex(null)} />}
       </main>
