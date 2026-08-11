@@ -1,4 +1,4 @@
-export default function ButtonTemp({ className, image, label, onClick, style }) {
+export default function ButtonTemp({ className, image, label, onClick, showContent = true, style }) {
   return (
     <button
       className={className}
@@ -18,20 +18,22 @@ export default function ButtonTemp({ className, image, label, onClick, style }) 
       }}
       type="button"
     >
-      <img
-        alt=""
-        src={image}
-        style={{
-          height: '56px',
-          objectFit: 'contain',
-          position: 'absolute',
-          right: '-5px',
-          top: '-8px',
-          transform: 'rotate(15deg)',
-          width: '56px',
-        }}
-      />
-      {label}
+      {showContent && (
+        <img
+          alt=""
+          src={image}
+          style={{
+            height: '56px',
+            objectFit: 'contain',
+            position: 'absolute',
+            right: '-5px',
+            top: '-8px',
+            transform: 'rotate(15deg)',
+            width: '56px',
+          }}
+        />
+      )}
+      {showContent && label}
     </button>
   );
 }

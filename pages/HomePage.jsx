@@ -51,10 +51,10 @@ export default function HomePage() {
         .button-ring {
           bottom: 12vh;
           height: 104px;
-          left: 50%;
+          left: 75%;
           position: fixed;
           transform: translateX(-50%);
-          width: min(900px, calc(100vw - 48px));
+          width: min(600px, calc(50vw - 48px));
           z-index: 2;
         }
 
@@ -152,6 +152,7 @@ export default function HomePage() {
                       className="circle-button"
                       key={buttonLabels[buttonIndex]}
                       onClick={() => setPopupIndex(buttonIndex)}
+                      showContent={offset === 0}
                       style={{
                         marginLeft: offset === 0 ? 0 : '-110px',
                         opacity: offset === 0 ? 1 : 0.35,
