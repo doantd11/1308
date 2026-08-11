@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 const COLORS = ['#ef4444', '#f97316', '#eab308', '#22c55e', '#06b6d4', '#3b82f6', '#a855f7', '#ec4899'];
 
@@ -15,6 +15,7 @@ export default function ConfettiCannon({ side }) {
   const [bursts, setBursts] = useState([]);
   const dragStart = useRef(null);
   const dragged = useRef(false);
+  const initialFired = useRef(false);
   const direction = side === 'left' ? 1 : -1;
 
   const fire = () => {
@@ -24,6 +25,12 @@ export default function ConfettiCannon({ side }) {
       setBursts((current) => current.filter(({ id }) => id !== burst.id));
     }, 1400);
   };
+
+  useEffect(() => {
+    if (initialFired.current) return;
+    initialFired.current = true;
+    fire();
+  }, []);
 
   const startPull = (event) => {
     dragStart.current = event.clientY;
