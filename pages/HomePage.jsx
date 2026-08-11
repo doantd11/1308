@@ -1,5 +1,5 @@
 import BackgroundMusic from '../components/audio/BackgroundMusic';
-import LikeBackground from '../components/like/LikeBackground';
+import BackgroundTemp from '../components/temp/BackgroundTemp';
 
 export default function HomePage() {
   return (
@@ -18,7 +18,7 @@ export default function HomePage() {
         }
       `}</style>
       <main className="home-page">
-        <LikeBackground />
+        <BackgroundTemp />
         <BackgroundMusic />
       </main>
     </>
