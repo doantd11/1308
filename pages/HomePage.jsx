@@ -46,12 +46,12 @@ export default function HomePage() {
         .button-ring {
           border: 2px solid #2563eb;
           border-radius: 50%;
-          bottom: -120vh;
-          height: 240vh;
+          bottom: -50vh;
+          height: 100vh;
           left: calc(100% - 20px);
           position: absolute;
           transition: transform 600ms ease-out;
-          width: 240vh;
+          width: 100vh;
         }
 
         .circle-button {
