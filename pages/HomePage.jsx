@@ -1,6 +1,7 @@
 import BackgroundMusic from '../components/audio/BackgroundMusic';
 import ContinueButton from '../components/ContinueButton';
 import BackgroundTemp from '../components/temp/BackgroundTemp';
+import React from 'react';
 
 export default function HomePage() {
   return (
@@ -20,12 +21,12 @@ export default function HomePage() {
 
         .home-buttons {
           align-items: flex-end;
-          bottom: 32px;
+          bottom: 100px;
           display: flex;
           flex-direction: column;
           gap: 16px;
           position: absolute;
-          right: 32px;
+          right: 100px;
           z-index: 1;
         }
       `}</style>
