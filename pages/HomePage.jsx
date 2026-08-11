@@ -1,16 +1,6 @@
 import BackgroundMusic from '../components/audio/BackgroundMusic';
-import HateButton from '../components/hate/HateButton';
-import LikeButton from '../components/like/LikeButton';
-import LoveButton from '../components/love/LoveButton';
-import SadButton from '../components/sad/SadButton';
+import ContinueButton from '../components/ContinueButton';
 import BackgroundTemp from '../components/temp/BackgroundTemp';
-
-const buttonItems = [
-  { id: 'like', Component: LikeButton },
-  { id: 'sad', Component: SadButton },
-  { id: 'love', Component: LoveButton },
-  { id: 'hate', Component: HateButton },
-];
 
 export default function HomePage() {
   return (
@@ -42,9 +32,7 @@ export default function HomePage() {
       <main className="home-page">
         <BackgroundTemp />
         <div className="home-buttons">
-          {buttonItems.map(({ id, Component }) => (
-            <Component key={id} />
-          ))}
+          <ContinueButton />
         </div>
         <BackgroundMusic />
       </main>
