@@ -1,27 +1,23 @@
-export default function Continue({ onClose }) {
+import { useState } from 'react';
+
+export default function Continue() {
+  const [isVisible, setIsVisible] = useState(true);
+
+  if (!isVisible) return null;
+
   return (
     <div
       style={{
+        background:
+          'radial-gradient(circle 80vh at 100% 100%, transparent 0 80vh, rgba(0, 0, 0, 0.35) 95vh, rgba(0, 0, 0, 0.9) 140vh)',
         inset: 0,
         position: 'fixed',
         zIndex: 1,
       }}
     >
-      <div
-        aria-hidden="true"
-        style={{
-          background: 'linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.35))',
-          inset: 0,
-          maskImage: 'radial-gradient(circle 80vh at 100% 100%, transparent 0 80vh, #000 80vh)',
-          pointerEvents: 'none',
-          position: 'absolute',
-          WebkitMaskImage:
-            'radial-gradient(circle 80vh at 100% 100%, transparent 0 80vh, #000 80vh)',
-        }}
-      />
       <button
         aria-label="Close"
-        onClick={onClose}
+        onClick={() => setIsVisible(false)}
         style={{
           alignItems: 'center',
           background: '#000',
