@@ -18,22 +18,21 @@ export default function ButtonTemp({ className, image, label, onClick, showConte
       }}
       type="button"
     >
-      {showContent && (
-        <img
-          alt=""
-          src={image}
-          style={{
-            height: '56px',
-            objectFit: 'contain',
-            position: 'absolute',
-            right: '-5px',
-            top: '-8px',
-            transform: 'rotate(15deg)',
-            width: '56px',
-          }}
-        />
-      )}
-      {showContent && label}
+      <img
+        alt=""
+        src={image}
+        style={{
+          height: '56px',
+          objectFit: 'contain',
+          opacity: showContent ? 1 : 0,
+          position: 'absolute',
+          right: '-5px',
+          top: '-8px',
+          transform: 'rotate(15deg)',
+          width: '56px',
+        }}
+      />
+      <span style={{ opacity: showContent ? 1 : 0 }}>{label}</span>
     </button>
   );
 }
