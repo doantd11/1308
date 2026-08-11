@@ -1,4 +1,4 @@
-export default function ButtonTemp({ className, image, label, onClick }) {
+export default function ButtonTemp({ className, image, label, onClick, style }) {
   return (
     <button
       className={className}
@@ -14,6 +14,7 @@ export default function ButtonTemp({ className, image, label, onClick }) {
         padding: '24px 40px',
         whiteSpace: 'nowrap',
         width: 'max-content',
+        ...style,
       }}
       type="button"
     >
