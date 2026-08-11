@@ -78,22 +78,20 @@ export default function HomePage() {
 
         .page-next {
           animation: pageNext 600ms ease-out both;
-          transform-origin: 100% 100%;
         }
 
         .page-previous {
           animation: pagePrevious 600ms ease-out both;
-          transform-origin: 100% 100%;
         }
 
         @keyframes pageNext {
-          from { opacity: 0; transform: rotate(-80deg); }
-          to { opacity: 1; transform: rotate(0); }
+          from { opacity: 0; transform: translateX(100%); }
+          to { opacity: 1; transform: translateX(0); }
         }
 
         @keyframes pagePrevious {
-          from { opacity: 0; transform: rotate(80deg); }
-          to { opacity: 1; transform: rotate(0); }
+          from { opacity: 0; transform: translateX(-100%); }
+          to { opacity: 1; transform: translateX(0); }
         }
 
         .circle-button {
