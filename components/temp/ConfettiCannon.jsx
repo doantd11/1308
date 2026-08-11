@@ -49,10 +49,12 @@ export default function ConfettiCannon({ side }) {
       aria-label={`Pháo giấy bên ${side === 'left' ? 'trái' : 'phải'}`}
       style={{
         bottom: '90px',
-        left: side === 'left' ? '48px' : 'auto',
+        left: side === 'left' ? 'max(24px, 12vw)' : 'auto',
         pointerEvents: 'auto',
         position: 'absolute',
-        right: side === 'right' ? '48px' : 'auto',
+        right: side === 'right' ? 'max(24px, 12vw)' : 'auto',
+        transform: 'scale(4)',
+        transformOrigin: 'bottom center',
         width: '72px',
         zIndex: 1,
       }}
