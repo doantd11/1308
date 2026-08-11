@@ -19,9 +19,9 @@ export default function BackgroundTemp() {
           display: 'block',
           height: 'auto',
           left: '50%',
-          maxWidth: '100%',
+          maxWidth: '200%',
           position: 'absolute',
-          top: 0,
+          top: '-71px',
           transform: 'translateX(-50%)',
           width: '740px',
         }}
