@@ -1,12 +1,12 @@
-import ConfettiCannon from './ConfettiCannon';
-import birthdayBanner from '../../images/sticker/hb.png';
+import backgroundImage from '../../images/background/bg.png';
 
 export default function BackgroundTemp() {
   return (
     <div
+      aria-hidden="true"
       style={{
-        backgroundColor: '#fff',
         inset: 0,
+        overflow: 'hidden',
         pointerEvents: 'none',
         position: 'fixed',
         zIndex: 0,
@@ -14,20 +14,14 @@ export default function BackgroundTemp() {
     >
       <img
         alt=""
-        src={birthdayBanner}
+        src={backgroundImage}
         style={{
           display: 'block',
-          height: 'auto',
-          left: '50%',
-          maxWidth: '200%',
-          position: 'absolute',
-          top: '-71px',
-          transform: 'translateX(-50%)',
-          width: '740px',
+          height: '100%',
+          objectFit: 'cover',
+          width: '100%',
         }}
-        />
-      <ConfettiCannon side="left" />
-      <ConfettiCannon side="right" />
+      />
     </div>
   );
 }
