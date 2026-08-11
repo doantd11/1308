@@ -8,7 +8,7 @@ const createParticles = (direction) =>
     id: index,
     rotate: `${Math.round(Math.random() * 720 - 360)}deg`,
     x: `${Math.round((Math.random() * 160 + 30) * direction)}px`,
-    y: `${Math.round(-(Math.random() * 180 + 80))}px`,
+    y: `${Math.round(-(Math.random() * 234 + 104))}px`,
   }));
 
 export default function ConfettiCannon({ side }) {
@@ -55,7 +55,7 @@ export default function ConfettiCannon({ side }) {
     <div
       aria-label={`Pháo giấy bên ${side === 'left' ? 'trái' : 'phải'}`}
       style={{
-        bottom: '90px',
+        bottom: '120px',
         left: side === 'left' ? 'max(24px, 12vw)' : 'auto',
         pointerEvents: 'auto',
         position: 'absolute',
