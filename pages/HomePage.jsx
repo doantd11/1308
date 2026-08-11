@@ -1,9 +1,12 @@
 import BackgroundMusic from '../components/audio/BackgroundMusic';
+import Continue from '../components/continue/Continue';
 import ContinueButton from '../components/ContinueButton';
 import BackgroundTemp from '../components/temp/BackgroundTemp';
-import React from 'react';
+import React, { useState } from 'react';
 
 export default function HomePage() {
+  const [isContinueOpen, setIsContinueOpen] = useState(false);
+
   return (
     <>
       <style>{`
@@ -33,8 +36,9 @@ export default function HomePage() {
       <main className="home-page">
         <BackgroundTemp />
         <div className="home-buttons">
-          <ContinueButton />
+          {!isContinueOpen && <ContinueButton onClick={() => setIsContinueOpen(true)} />}
         </div>
+        {isContinueOpen && <Continue onClose={() => setIsContinueOpen(false)} />}
         <BackgroundMusic />
       </main>
     </>
