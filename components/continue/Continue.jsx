@@ -7,14 +7,29 @@ export default function Continue({ onClose }) {
         zIndex: 1,
       }}
     >
+      <style>{`
+        @keyframes continueOverlayIn {
+          from {
+            clip-path: circle(0 at 0 0);
+            -webkit-clip-path: circle(0 at 0 0);
+          }
+          to {
+            clip-path: circle(160% at 0 0);
+            -webkit-clip-path: circle(160% at 0 0);
+          }
+        }
+      `}</style>
       <div
         aria-hidden="true"
         style={{
+          animation: 'continueOverlayIn 900ms ease-out forwards',
           background: 'linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.35))',
+          clipPath: 'circle(160% at 0 0)',
           inset: 0,
           maskImage: 'radial-gradient(circle 80vh at 100% 100%, transparent 0 80vh, #000 80vh)',
           pointerEvents: 'none',
           position: 'absolute',
+          WebkitClipPath: 'circle(160% at 0 0)',
           WebkitMaskImage:
             'radial-gradient(circle 80vh at 100% 100%, transparent 0 80vh, #000 80vh)',
         }}
