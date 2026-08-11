@@ -1,4 +1,4 @@
-import birthdayBanner from '../../images/sticker/hb.png';
+import backgroundImage from '../../images/background/bg.png';
 
 export default function BackgroundTemp() {
   return (
@@ -14,16 +14,15 @@ export default function BackgroundTemp() {
     >
       <img
         alt=""
-        src={birthdayBanner}
+        src={backgroundImage}
         style={{
           display: 'block',
-          height: 'auto',
-          left: '50%',
-          maxWidth: '100%',
+          height: '100vh',
+          left: 0,
+          objectFit: 'cover',
           position: 'absolute',
-          top: '-71px',
-          transform: 'translateX(-50%)',
-          width: '740px',
+          top: 0,
+          width: '100vw',
         }}
       />
     </div>
